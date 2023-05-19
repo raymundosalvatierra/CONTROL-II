@@ -1,31 +1,182 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%CODIGOS PARA EL TP 2 DE LABORET:
-%Empiezo limpiando el comand windows y el workspace
-clear all
-clc
-close all
+polo1 =
 
-%Declaro los datos:
-polo1 = -1
-polo2 = -1
-cero = -10
-ganancia = 10
-sobrepaso = 10
-tr = 2 % es el tiempo de respuesta al 2%
-error = 0 
-periodo = 0.06
+    -1
 
-%Calculo valor de epsilon ?
-epsilon = (-log(sobrepaso/100))/(sqrt((pi^2)+(log(sobrepaso/100)^2))) 
 
-%Calculo de la frecuencua normalizada wo
-wo = 4/((epsilon)*(tr))
+polo2 =
 
-%Calculo de wd frecuencia amortiguada
-wd = (wo)*sqrt(1-(epsilon)^2)
+    -1
 
-%Calculo del período de la frecuencia angular amortiguada td
-td = (2*pi)/(wd)
+
+cero =
+
+   -10
+
+
+ganancia =
+
+    10
+
+
+sobrepaso =
+
+    10
+
+
+tr =
+
+     2
+
+
+error =
+
+     0
+
+
+periodo =
+
+    0.0600
+
+
+epsilon =
+
+    0.5912
+
+
+wo =
+
+    3.3832
+
+
+wd =
+
+    2.7288
+
+
+td =
+
+    2.3026
+
+
+m =
+
+   38.3764
+
+
+r =
+
+    0.8869
+
+
+omega =
+
+    0.1637
+
+
+G =
+ 
+  10 (s+10)
+  ---------
+   (s+1)^2
+ 
+Continuous-time zero/pole/gain model.
+
+
+Gd =
+ 
+  0.73802 (z-0.5405)
+  ------------------
+     (z-0.9418)^2
+ 
+Sample time: 0.06 seconds
+Discrete-time zero/pole/gain model.
+
+>> c
+Undefined function or variable 'c'.
+ 
+Did you mean:
+>> C
+
+C =
+ 
+  0.2333 (z-0.5153)
+  -----------------
+     (z-0.2024)
+ 
+Name: C
+Sample time: 0.06 seconds
+Discrete-time zero/pole/gain model.
+
+>> F = feedback(C*Gd , 1)
+
+F =
+ 
+    0.17218 (z-0.5153) (z-0.5405)
+  ----------------------------------
+  (z-0.1648) (z^2 - 1.749z + 0.7981)
+ 
+Sample time: 0.06 seconds
+Discrete-time zero/pole/gain model.
+
+>> pole(F)
+
+ans =
+
+   0.1648 + 0.0000i
+   0.8745 + 0.1827i
+   0.8745 - 0.1827i
+
+>> zero(F)
+
+ans =
+
+    0.5153
+    0.5405
+
+>> pzmap(F)
+>> step(F)
+>> C
+
+C =
+ 
+  0.28759 (z-0.4974)
+  ------------------
+     (z-0.001279)
+ 
+Name: C
+Sample time: 0.06 seconds
+Discrete-time zero/pole/gain model.
+
+>> F = feedback(C*Gd , 1)
+
+F =
+ 
+    0.21224 (z-0.4974) (z-0.5405)
+  ----------------------------------
+  (z+0.0706) (z^2 - 1.743z + 0.7921)
+ 
+Sample time: 0.06 seconds
+Discrete-time zero/pole/gain model.
+
+>> pole(F)
+
+ans =
+
+  -0.0706 + 0.0000i
+   0.8716 + 0.1802i
+   0.8716 - 0.1802i
+
+>> zero(F)
+
+ans =
+
+    0.4974
+    0.5405
+
+>> pzmap(F)
+>> pzmap(F)
+>> step(F)
+>> 
 
 %Calculo la cantidad de muestras por ciclo de la frecuencia amortiguada
 m = (td)/(periodo)
