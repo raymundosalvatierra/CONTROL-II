@@ -1,5 +1,4 @@
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %CODIGOS PARA EL TP 2 DE LABORET:
 %Empiezo limpiando el comand windows y el workspace
 clear all
@@ -16,14 +15,33 @@ tr = 2 % es el tiempo de respuesta al 2%
 error = 0 
 periodo = 0.06
 
-%Calculo valor de epsilon ε
+%Calculo valor de epsilon ?
 epsilon = (-log(sobrepaso/100))/(sqrt((pi^2)+(log(sobrepaso/100)^2))) 
 
 %Calculo de la frecuencua normalizada wo
 wo = 4/((epsilon)*(tr))
 
-%Calculo de wd
+%Calculo de wd frecuencia amortiguada
 wd = (wo)*sqrt(1-(epsilon)^2)
 
-
+%Calculo del período de la frecuencia angular amortiguada td
 td = (2*pi)/(wd)
+
+%Calculo la cantidad de muestras por ciclo de la frecuencia amortiguada
+m = (td)/(periodo)
+
+%Mediante la equivalecia de planos S y Z determinar la ubicación de los
+%polos deseados en el plano Z
+r = exp((-epsilon)*(wo)*(periodo))
+
+%Calculo del angulo omega:
+omega = (wd)*(periodo)
+
+%Creacion de la funcion de transferencia en tiempo continuo 
+G = zpk ([-10],[-1 -1],[10])
+
+%Paso mi funcion de transferencia de tiempo continuo a tiempo discreto
+Gd = c2d(G,periodo,'zoh')
+
+sisotool(Gd)
+
